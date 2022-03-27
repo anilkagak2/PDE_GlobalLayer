@@ -516,6 +516,9 @@ for epoch in range(start_epoch, args.epochs):
     is_best = acc1 > best_acc1
     best_acc1 = max(acc1, best_acc1)
 
+    message = '---- Best so far --- ' + str(best_acc1)
+    logger.info(message)
+
     model_train_dict = {
             'epoch': epoch + 1,
             'arch': "GlobalLayer-" + args.model,
