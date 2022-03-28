@@ -15,6 +15,7 @@ def wide_resnet(pretrained: bool = False, m :int=6, width : int = 2, progress: b
     """
     kwargs['width_per_group'] = 64 * width
     keys = ['n1', 'n2', 'n3', 'n4']
+    kwargs ['cell_type'] = 'BasicBlock'
     print(kwargs)
     for key in keys:
         kwargs[key] = kwargs[key] * width

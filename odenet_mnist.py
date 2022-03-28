@@ -143,12 +143,15 @@ def get_odenet_model(network='m_odenet',
                 'dy' :           args.dy,
                 'dt' :           args.dt, 
                 'init_h0_h':     args.init_h0_h,
+                'use_res' :      args.use_res,
                 'use_silu' :     args.use_silu,
                 'constant_Dxy':  args.constant_Dxy,
+                'custom_uv':     args.custom_uv,
+                'custom_dxy':    args.custom_dxy,
                 'no_f' :         args.no_f,
                 'block_type' :   'default',
-                'use_f_for_g':   True,
-                'old_style' :    True,
+                'use_f_for_g':   args.use_f_for_g, #True,
+                'old_style' :    args.old_style, #True,
         }
 
         feature_layers = [ GlobalFeatureBlock_Diffusion ( 64, pde_args ) ]

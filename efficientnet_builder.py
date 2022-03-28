@@ -382,6 +382,8 @@ class EfficientNetBuilder:
 
             ba['cell_type'] = 'InvertedResidualCell'
             ba['use_diff_eps'] = False 
+            ba['custom_uv'] = ''
+            ba['custom_dxy'] = ''
             #block = GlobalFeatureBlock_Diffusion(**ba)
             block = GlobalFeatureBlock_Diffusion( ba['in_chs'], ba )
         else:

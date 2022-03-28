@@ -3,40 +3,7 @@
 
 CUDA='0'
 DATA=./data/
-EPOCHS=0 #300
-
-
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'BasicBlock' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'Bottleneck' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'DwConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'PwConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'FullConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'identity' 
-
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'BasicBlock' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'Bottleneck' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'DwConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'PwConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'FullConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'identity' 
-
-
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'BasicBlock' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'Bottleneck' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'DwConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'PwConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'FullConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_uv 'identity' 
-
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'BasicBlock' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'Bottleneck' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'DwConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'PwConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'FullConv' 
-CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 6e-5 --non_linear -e $EPOCHS  --custom_dxy 'identity' 
-
-
-
+EPOCHS=300
 
 #CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet --dataset CIFAR-10 -m 18 --n1 16 --n2 32 --n3 64  -e $EPOCHS
 #CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet --dataset CIFAR-100 -m 18 --n1 16 --n2 32 --n3 64   -e $EPOCHS
@@ -58,7 +25,11 @@ CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --
 #CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet --dataset CIFAR-100 -m 9 --n1 16 --n2 32 --n3 64 --n4 64 -b 128  -o   -e $EPOCHS
 
 # Resnet56 Global-Diffusion (m=2) (330K, 30M)
-#CUDA_VISIBLE_DEVICES='0' python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 2 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5  --non_linear  -e $EPOCHS & 
+CUDA_VISIBLE_DEVICES='0' python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 2 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 --use_res --non_linear  -e $EPOCHS #& 
+CUDA_VISIBLE_DEVICES='0' python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 2 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 --no_f --non_linear  -e $EPOCHS #& 
+CUDA_VISIBLE_DEVICES='0' python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 2 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 --old_style --non_linear  -e $EPOCHS #& 
+CUDA_VISIBLE_DEVICES='0' python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 2 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 --init_h0_h --non_linear  -e $EPOCHS #& 
+CUDA_VISIBLE_DEVICES='0' python train.py --data $DATA --model Resnet-Global --dataset CIFAR-10 -m 2 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 --dx 2 --dy 2 --non_linear  -e $EPOCHS #& 
 #CUDA_VISIBLE_DEVICES='1' python train.py --data $DATA --model Resnet-Global --dataset CIFAR-100 -m 2 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 --non_linear  -e $EPOCHS &
 
 
@@ -76,14 +47,14 @@ CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model Resnet-Global --
 
 
 # Wide-Resnet WRN-40-4 (9M, 1.3B)
-#CUDA_VISIBLE_DEVICES='2' python train.py --data $DATA --model WideResnet --dataset CIFAR-10 -m 6 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 1e-4 -wdt 4  -e $EPOCHS # &
+#CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model WideResnet --dataset CIFAR-10 -m 6 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 1e-4 -wdt 4  -e $EPOCHS # &
 #CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model WideResnet --dataset CIFAR-100 -m 6 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 1e-4 -wdt 4  -e $EPOCHS # &
 
 # Wide-Resnet WRN-40-4 Global Diffusion  (2.8M, 425M)
 #CUDA_VISIBLE_DEVICES='2' python train.py --data $DATA --model WideResnet-Global --dataset CIFAR-10 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 5e-5 -wdt 4    --non_linear  -e $EPOCHS  & 
 #CUDA_VISIBLE_DEVICES='3' python train.py --data $DATA --model WideResnet-Global --dataset CIFAR-100 -m 1 --K 1 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 5e-5 -wdt 4    --non_linear  -e $EPOCHS  &
-#CUDA_VISIBLE_DEVICES='1' python train.py --data $DATA --model WideResnet-Global --dataset CIFAR-10 -m 1 --K 5 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 -wdt 4     --non_linear  -e $EPOCHS & 
-#CUDA_VISIBLE_DEVICES='0' python train.py --data $DATA --model WideResnet-Global --dataset CIFAR-100 -m 1 --K 5 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 -wdt 4  --non_linear  -e $EPOCHS & 
+#CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model WideResnet-Global --dataset CIFAR-10 -m 1 --K 5 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 -wdt 4     --non_linear  -e $EPOCHS 
+#CUDA_VISIBLE_DEVICES=$CUDA python train.py --data $DATA --model WideResnet-Global --dataset CIFAR-100 -m 1 --K 5 --n1 16 --n2 32 --n3 64 --n4 64 -b 32 -wd 8e-5 -wdt 4  --non_linear  -e $EPOCHS 
 
 
 

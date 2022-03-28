@@ -20,13 +20,24 @@ from timm.models.layers import create_conv2d, drop_path, make_divisible, create_
 def get_init_block( planes, block_type = 'default', args = None ):
     assert(args is not None)
 
-    if block_type == 'BasicBlock':
-        separable = False 
-        if args and 'separable' in args:
+    separable = False 
+    if args and 'separable' in args:
             separable = args['separable']
+
+    if block_type == 'BasicBlock':
         init_h = BasicBlock(planes, planes, separable=separable)
+    elif block_type == 'Bottleneck':
+        init_h = Bottleneck(planes, planes, separable=separable, expansion=1)
     elif block_type == 'BasicDense':
         init_h = BasicDenseLayer( planes, bn_size=2 )  
+    elif block_type == 'DwConv':
+        dw_kernel_size = args.get('dw_kernel_size', 3) 
+        init_h = nn.Conv2d(planes, planes, kernel_size=dw_kernel_size, stride=1, padding=1, groups=planes)
+    elif block_type == 'FullConv':
+        dw_kernel_size = args.get('dw_kernel_size', 3) 
+        init_h = nn.Conv2d(planes, planes, kernel_size=dw_kernel_size, stride=1, padding=1)
+    elif block_type == 'PwConv':
+        init_h = nn.Conv2d(planes, planes, kernel_size=1, stride=1)
     elif block_type == 'DartCell':
         genotype, C_prev_prev, C_prev, C_curr, reduction, reduction_prev = args['genotype'], args['C_prev_prev'], args['C_prev'], args['C_curr'], args['reduction'], args['reduction_prev']
         init_h = Cell(genotype, C_prev_prev, C_prev, C_curr, reduction, reduction_prev)  
@@ -44,8 +55,11 @@ def get_init_block( planes, block_type = 'default', args = None ):
                  stride=stride, dilation=dilation, pad_type=pad_type, act_layer=act_layer, noskip=noskip,
                  exp_ratio=exp_ratio, exp_kernel_size=exp_kernel_size, pw_kernel_size=pw_kernel_size,
                  se_layer=se_layer, norm_layer=norm_layer, conv_kwargs=conv_kwargs, drop_path_rate=drop_path_rate)
-    else:
+    elif block_type == 'identity' or block_type == 'default':
         init_h = nn.Identity()
+    else:
+        print('Undefined cell type.', block_type)
+        assert(1==2)
 
     return init_h    
 
@@ -145,18 +159,23 @@ class GlobalFeatureBlock_Diffusion(nn.Module):
 
         # TODO Ideally I should allow linear counter-part. But this needs some work
         if self.nonlinear_pde:
-            if use_dw:
+            if args['custom_uv'] == '':
+              if use_dw:
                 self.convg = DepthwiseSeparableConv(planes, planes, dw_kernel_size, stride=1, dilation=dilation, pad_type=pad_type, 
                             act_layer=act_layer, noskip=True, pw_kernel_size=pw_kernel_size, se_layer=se_layer, norm_layer=norm_layer, drop_path_rate=drop_path_rate )
                 self.convg1 = DepthwiseSeparableConv(planes, planes, dw_kernel_size, stride=1, dilation=dilation, pad_type=pad_type, 
                             act_layer=act_layer, noskip=True, pw_kernel_size=pw_kernel_size, se_layer=se_layer, norm_layer=norm_layer, drop_path_rate=drop_path_rate )
-            else:
+              else:
                 if old_style:
                     self.convg  = nn.Conv2d(planes, planes, kernel_size=dw_kernel_size, stride=1, padding=1, groups=planes)
                     self.convg1 = nn.Conv2d(planes, planes, kernel_size=dw_kernel_size, stride=1, padding=1, groups=planes)
                 else:    
                     self.convg  = create_conv2d(planes, planes, kernel_size=dw_kernel_size, stride=1, dilation=dilation, padding=pad_type, depthwise=True)
                     self.convg1 = create_conv2d(planes, planes, kernel_size=dw_kernel_size, stride=1, dilation=dilation, padding=pad_type, depthwise=True)
+            else: 
+              print('Custom uv ', args['custom_uv'])
+              self.convg  = get_init_block( planes, block_type = args['custom_uv'], args = args )
+              self.convg1 = get_init_block( planes, block_type = args['custom_uv'], args = args )
 
             if use_diff_eps:
                 self.bng = norm_layer(planes, planes)
@@ -166,6 +185,7 @@ class GlobalFeatureBlock_Diffusion(nn.Module):
                 self.bng1 = norm_layer(planes)
 
             if constant_Dxy == False:
+              if args['custom_dxy'] == '':
                 if use_cDs == False:
                     if old_style:
                         self.convDx = nn.Conv2d(planes, planes, kernel_size=dw_kernel_size, stride=1, padding=1, groups=planes)
@@ -178,10 +198,15 @@ class GlobalFeatureBlock_Diffusion(nn.Module):
                             act_layer=act_layer, noskip=True, pw_kernel_size=pw_kernel_size, se_layer=se_layer, norm_layer=norm_layer, drop_path_rate=drop_path_rate )
                     self.convDy = DepthwiseSeparableConv(planes, planes, dw_kernel_size, stride=1, dilation=dilation, pad_type=pad_type, 
                             act_layer=act_layer, noskip=True, pw_kernel_size=pw_kernel_size, se_layer=se_layer, norm_layer=norm_layer, drop_path_rate=drop_path_rate )
-                if use_diff_eps:
+              else: 
+                print('Custom xy ', args['custom_dxy'])
+                self.convDx = get_init_block( planes, block_type = args['custom_dxy'], args = args )
+                self.convDy = get_init_block( planes, block_type = args['custom_dxy'], args = args )
+
+              if use_diff_eps:
                     self.bnDx = norm_layer(planes, planes)
                     self.bnDy = norm_layer(planes, planes)
-                else:    
+              else:    
                     self.bnDx = norm_layer(planes)
                     self.bnDy = norm_layer(planes)
 

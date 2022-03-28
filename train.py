@@ -39,8 +39,12 @@ parser.add_argument('--pde_state', default=0, type=int,
                     metavar='N', help='PDE State so that we can try out multiple(default: 0)')
 parser.add_argument('-dxy', '--constant_Dxy', default=False, action='store_true')
 parser.add_argument('--use_silu', default=False, action='store_true')
+parser.add_argument('--custom_uv', default='', type=str)
+parser.add_argument('--custom_dxy', default='', type=str)
 parser.add_argument('--use_res', default=False, action='store_true')
 parser.add_argument('--init_h0_h', default=False, action='store_true')
+parser.add_argument('--use_f_for_g', default=False, action='store_true')
+parser.add_argument('--old_style', default=False, action='store_true')
 parser.add_argument('-nof', '--no_f', default=False, action='store_true')
 parser.add_argument('--dt', type=float, default=0.2, help='Random erase prob (default: 0.)')
 parser.add_argument('--dx', type=int, default=1, help='Random erase prob (default: 0.)')
@@ -183,6 +187,9 @@ exp_name = args.dataset + '-' + args.model + '-e-'+str(args.epochs) + '-lr-'+str
            '-wd-'+ str(args.weight_decay) + '-b-'+str(args.batch_size)+'-K-' + str(args.K)+'-' +\
            '-dxy-' + str(int(args.constant_Dxy)) +\
            '-silu-' + str(int(args.use_silu)) +\
+           '-res-' + str(int(args.use_res)) +\
+           '-old-' + str(int(args.old_style)) +\
+           '-fforg-' + str(int(args.use_f_for_g)) +\
            '-nof-' + str(int(args.no_f)) +\
            '-dt-' + str(args.dt) +\
            '-dx-' + str(args.dx) +\
@@ -193,6 +200,10 @@ exp_name = args.dataset + '-' + args.model + '-e-'+str(args.epochs) + '-lr-'+str
 
 if args.pde_state != 0:
     exp_name += '-pde-' + str(args.pde_state) + '-'
+if args.custom_uv != '':
+    exp_name += '-uv-' + str(args.custom_uv) + '-'
+if args.custom_dxy != '':
+    exp_name += '-dxy-' + str(args.custom_dxy) + '-'
 if args.dataset in ['CIFAR-10', 'CIFAR-100']:
     exp_name += str(args.n1) + '-'+str(args.n2) + '-'+str(args.n3)+ '-'+str(args.n4)+'-sep-'+str(args.separable)
     if args.model in ['WideResnet', 'WideResnet-Global'] : 
@@ -255,7 +266,7 @@ def get_architecture_for_dataset(args, n_class=10, aux=True):
         elif args.model in [ 'Densenet', 'Densenet-Global' ]:
             cnn = DenseNet( num_classes=n_class, block_config=(args.n1, args.n2, args.n3), global_ft=global_ft, args=args )
         elif args.model in [ 'WideResnet', 'WideResnet-Global' ]:
-            cnn = wide_resnet( num_classes=n_class, m=args.resnet_m, n1=args.n1, n2=args.n2, n3=args.n3, n4=args.n4, global_ft=global_ft, args=args )
+            cnn = wide_resnet( num_classes=n_class, m=args.resnet_m, n1=args.n1, n2=args.n2, n3=args.n3, n4=args.n4, global_ft=global_ft, args=args, width=args.width )
         elif args.model in [ 'DARTS', 'DARTS-Global' ]:
             from collections import namedtuple
             Genotype = namedtuple('Genotype', 'normal normal_concat reduce reduce_concat')

@@ -49,6 +49,8 @@ class DARTS_NetworkCIFAR(nn.Module):
                 'init_h0_h':     args.init_h0_h,
                 'use_silu' :     args.use_silu,
                 'constant_Dxy':  args.constant_Dxy,
+                'custom_uv':     args.custom_uv,
+                'custom_dxy':    args.custom_dxy,
                 'no_f' :         args.no_f,
                 'cell_type' :   'DartCell',
                 'old_style' :   False, # True, 

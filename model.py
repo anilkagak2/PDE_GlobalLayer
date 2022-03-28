@@ -33,6 +33,7 @@ class ResNet(nn.Module):
         n2: int = 128,
         n3: int = 128,
         n4: int = 128,
+        cell_type : str = 'default',   
         args = None,
     ) -> None:
         super(ResNet, self).__init__()
@@ -54,9 +55,11 @@ class ResNet(nn.Module):
                 'use_silu' :     args.use_silu,
                 'use_res' :      args.use_res,
                 'constant_Dxy':  args.constant_Dxy,
+                'custom_uv':     args.custom_uv,
+                'custom_dxy':    args.custom_dxy,
                 'no_f' :         args.no_f,
-                'cell_type' :   'default',
-                'old_style' :   False, # True, 
+                'cell_type' :    cell_type,
+                'old_style' :    False, # True, 
         }
 
 
