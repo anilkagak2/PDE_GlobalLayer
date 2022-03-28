@@ -10,7 +10,7 @@ CNNs using the Global Layer composed of Partial Differential Equations
 Our codebase is written using [PyTorch](https://pytorch.org). You can set up the environment using [Conda](https://www.anaconda.com/products/individual) and executing the following commands.  
 
 ```
-conda create --name pytorch-1.10 python=3.10
+conda create --name pytorch-1.10 python=3.9
 conda activate pytorch-1.10
 conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
 ```
