@@ -1,4 +1,4 @@
-# PDE-CNNs ([Global Layer](https://openaccess.thecvf.com/content/CVPR2022/html/Kag_Condensing_CNNs_With_Partial_Differential_Equations_CVPR_2022_paper.html)) 
+# [PDE-CNNs (Global Layer)](https://openaccess.thecvf.com/content/CVPR2022/html/Kag_Condensing_CNNs_With_Partial_Differential_Equations_CVPR_2022_paper.html) 
 
 CNNs using the Global Layer composed of Partial Differential Equations
 
