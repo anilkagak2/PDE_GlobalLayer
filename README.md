@@ -49,12 +49,13 @@ bash runner-imagenet.sh
 
 
 ```
-@article{kag2022globallayer,
-  title={Condensing CNNs with Partial Differential Equations},
-  author={Kag, Anil and Saligrama, Venkatesh},
-  journal={In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year={2022}
+@InProceedings{Kag_2022_CVPR,
+    author    = {Kag, Anil and Saligrama, Venkatesh},
+    title     = {Condensing CNNs With Partial Differential Equations},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2022},
+    pages     = {610-619}
 }
-
 ```
 
