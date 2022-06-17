@@ -5,6 +5,8 @@ CNNs using the Global Layer composed of Partial Differential Equations
 
 ## Brief Description  
 
+![](<pdf/PDE-GlobalLayer-Poster.png>)
+
 ## Installation 
 
 Our codebase is written using [PyTorch](https://pytorch.org). You can set up the environment using [Conda](https://www.anaconda.com/products/individual) and executing the following commands.  
